@@ -30,7 +30,7 @@ const Recipes = db.define('recipes', {
         field: "url_img ",
         //? valida que sea una url el dato
         validate: {
-            isUrl: true
+            // isUrl: true
         }
     },
     time: {
