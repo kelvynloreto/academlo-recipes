@@ -10,7 +10,7 @@ const { jwtSecret } = require('../config');
 const { getUserById } = require('../users/users.controllers');
 const JwtStrategy = require('passport-jwt').Strategy; 
 //? Passport maneja estrategias para las diferentes autenticaciones
-const ExtractJwt = require('passport-jwt').ExtractJwt; 
+const ExtractJwt = require('passport-jwt').ExtractJwt;              
 //? Extrae los header de la peticion
 
 //? Exportando funcion anonima

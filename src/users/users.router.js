@@ -48,7 +48,8 @@ router.route('/:id')
         adminValidate,
         userServices.deleteUser
     )
-
+    
+//TODO agregar la ruta para obtener mis recetas
 
 
 
