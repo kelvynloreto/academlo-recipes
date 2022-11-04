@@ -31,7 +31,7 @@ const RecipesIngredients = db.define('recipes_incredients', {
             key: 'id',
             model: Ingredients
         }
-    } 
+    }
 })
 
 module.exports = RecipesIngredients

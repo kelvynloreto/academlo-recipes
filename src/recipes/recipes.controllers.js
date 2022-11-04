@@ -12,7 +12,6 @@ const UsersIngredients = require('../models/users_ingredients.models')
 
 
 
-
 const getAllRecipes = async () => {
     return await Recipes.findAll({
         attributes: {
@@ -23,20 +22,20 @@ const getAllRecipes = async () => {
         },
         {
             model: Users,
-            attributes:['id','firstName','lastName']
+            attributes: ['id', 'firstName', 'lastName']
         },
         {
             model: Instructions,
-            attributes:['description','step']
+            attributes: ['description', 'step']
         }, {
             model: RecipeIngredients,
-            attributes:['id','amount'],
+            attributes: ['id', 'amount'],
 
-            include:{
+            include: {
                 model: Ingredients,
-                attributes:['id','name','urlImg'],
-                include:{
-                    model:Types,
+                attributes: ['id', 'name', 'urlImg'],
+                include: {
+                    model: Types,
                 }
             }
         }
@@ -84,33 +83,33 @@ const deleteRecipe = async (id) => {
 };
 
 //? controlador para obtener las recetas que puede hacer un usuario desde los ingredientes agregados
-const getMyRecipes = async(userId) => {
+const getMyRecipes = async (userId) => {
     const userIngredients = await UsersIngredients.findAll({
-      where: {
-        userId
-      }
-    })
-    const filteredIngredients = userIngredients.map( obj = obj.ingredientId)
-    const recipeIngredients = await RecipeIngredients.findAll({
-      where: {
-        ingredientId: {
-          [Op.in]: filteredIngredients
+        where: {
+            userId
         }
-      }
+    })
+    const filteredIngredients = userIngredients.map(obj => obj.ingredientId)
+    const recipeIngredients = await RecipeIngredients.findAll({
+        where: {
+            ingredientId: {
+                [Op.in]: filteredIngredients
+            }
+        }
     })
 
     const filtereRecipes = recipeIngredients.map(obj => obj.recipeId)
-    
+
     const data = Recipes.findAll({
-        where:{
-            id:{
+        where: {
+            id: {
                 [Op.in]: filtereRecipes
             }
         }
     })
     return data
 }
-  
+
 
 module.exports = {
     getAllRecipes,
